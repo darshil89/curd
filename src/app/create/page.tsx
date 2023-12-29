@@ -9,7 +9,6 @@ const CreatePage = () => {
   const handleCreatePost: SubmitHandler<FormInputPost> = (
     data: any
   ) => {
-
     console.log(data);
   };
   return (
