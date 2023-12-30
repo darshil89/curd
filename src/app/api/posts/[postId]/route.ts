@@ -59,3 +59,22 @@ export async function PATCH(req: Request, context: contextProps) {
     );
   }
 }
+
+export async function GET(req: Request, context: contextProps) {
+  try {
+    await prisma.$connect();
+
+    const post = await prisma.post.findMany({
+      where: {
+        id: context.params.postId,
+      },
+    });
+
+    return NextResponse.json(post, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { message: "could not fetch a single post" },
+      { status: 500 }
+    );
+  }
+}

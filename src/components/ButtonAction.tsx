@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 const ButtonAction = ({ id }: any) => {
   const router = useRouter();
-  const { mutate: deletePost } = useMutation({
+  const { mutate: deletePost, isPending } = useMutation({
     mutationFn: async () => {
       return await axios.delete(`/api/posts/${id}`);
     },
@@ -21,11 +21,11 @@ const ButtonAction = ({ id }: any) => {
   });
   return (
     <div>
-      <Link href="/edit/1" className="btn mr-2">
+      <Link href={`/edit/${id}`} className="btn mr-2">
         Edit
       </Link>
       <button onClick={() => deletePost()} className="btn btn-error">
-        Delete
+        {isPending ? "Deleting..." : "Delete"}
       </button>
     </div>
   );

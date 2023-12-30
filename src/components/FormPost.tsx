@@ -9,15 +9,18 @@ const DATA = ["JavaScript", "TypeScript", "React", "Vue", "Angular"];
 
 interface FormPost {
   submit: SubmitHandler<FormInputPost>;
-  isEditing?: boolean;
+  isEditing: boolean;
+  initialValue?: FormInputPost;
 }
 
 interface Tag {
   id: number;
   name: string;
 }
-const FormPost: FC<FormPost> = ({ submit, isEditing }) => {
-  const { register, handleSubmit } = useForm<FormInputPost>();
+const FormPost: FC<FormPost> = ({ submit, isEditing, initialValue }) => {
+  const { register, handleSubmit } = useForm<FormInputPost>({
+    defaultValues: initialValue,
+  });
 
   // const { isPending, isError, data, error } = useQuery<Tag[]>({
   //   queryKey: ["tags"],

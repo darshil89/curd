@@ -40,7 +40,7 @@ const CreatePage = () => {
     <div>
       <BackButton />
       <h1 className="text-2xl my-4 font-bold text-center">Add new Post</h1>
-      <FormPost submit={handleCreatePost} isEditing={false} />
+      <FormPost submit={handleCreatePost}  isEditing={false} />
     </div>
   );
 };
