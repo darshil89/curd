@@ -5,6 +5,8 @@ import { FC } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 
+const DATA = ["JavaScript", "TypeScript", "React", "Vue", "Angular"];
+
 interface FormPost {
   submit: SubmitHandler<FormInputPost>;
   isEditing?: boolean;
@@ -17,16 +19,16 @@ interface Tag {
 const FormPost: FC<FormPost> = ({ submit, isEditing }) => {
   const { register, handleSubmit } = useForm<FormInputPost>();
 
-  const { isPending, isError, data, error } = useQuery<Tag[]>({
-    queryKey: ["tags"],
-    queryFn: async () => {
-      const res = await axios.get("/api/tags");
-      const data = res.data;
-      return data;
-    },
-  });
+  // const { isPending, isError, data, error } = useQuery<Tag[]>({
+  //   queryKey: ["tags"],
+  //   queryFn: async () => {
+  //     const res = await axios.get("/api/tags");
+  //     const data = res.data;
+  //     return data;
+  //   },
+  // });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <form
@@ -36,6 +38,7 @@ const FormPost: FC<FormPost> = ({ submit, isEditing }) => {
     >
       <input
         {...register("title", { required: true, maxLength: 20 })}
+        autoComplete="on"
         type="text"
         placeholder="Post Title"
         className="input input-bordered w-full max-w-lg"
@@ -45,6 +48,7 @@ const FormPost: FC<FormPost> = ({ submit, isEditing }) => {
         {...register("content", { required: true, maxLength: 100 })}
         className="textarea textarea-bordered w-full max-w-lg"
         placeholder="Post Content"
+        autoComplete="on"
       ></textarea>
 
       <select
@@ -52,19 +56,12 @@ const FormPost: FC<FormPost> = ({ submit, isEditing }) => {
         {...register("tag", { required: true })}
         defaultValue={""}
       >
-        <option value="">
-          Select Tags
-        </option>
-        {data &&
-          data.map((tag: Tag) => (
-            <option key={tag.id} value={tag.id}>
-              {tag.name}
-            </option>
-          ))}
+        <option value="">Select Tags</option>
+        {DATA && DATA.map((tag) => <option key={tag}>{tag}</option>)}
 
-        {isPending && <option>Loading...</option>}
+        {/* {isPending && <option>Loading...</option>}
 
-        {isError && <option>Error: {isError}</option>}
+        {isError && <option>Error: {isError}</option>} */}
       </select>
 
       <button type="submit" className="btn btn-primary w-full max-w-lg">
