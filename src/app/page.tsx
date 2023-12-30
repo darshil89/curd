@@ -4,7 +4,6 @@ import { prisma } from "../../prisma";
 async function getData() {
   try {
     const response = await prisma.post.findMany();
-
     return response;
   } catch (error: any) {
     console.log(error);

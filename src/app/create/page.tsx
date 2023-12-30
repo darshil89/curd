@@ -4,9 +4,11 @@ import BackButton from "@/components/BackButton";
 import FormPost from "@/components/FormPost";
 import { FormInputPost } from "@/types";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { SubmitHandler } from "react-hook-form";
 
 const CreatePage = () => {
+  const router = useRouter();
   const handleCreatePost: SubmitHandler<FormInputPost> = (data: any) => {
     console.log(data);
 
@@ -30,7 +32,8 @@ const CreatePage = () => {
       console.log(error);
     },
     onSuccess: (data) => {
-      console.log(data);
+      router.push("/");
+      router.refresh();
     },
   });
   return (

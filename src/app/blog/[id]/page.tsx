@@ -30,7 +30,7 @@ const BlogDetailPage = async ({ params }: BlogDetailPageProps) => {
         <h1 className="text-2xl font-bold my-4">{post?.title}</h1>
         <span className="badge badge-neutral">{post?.Tag}</span>
       </div>
-      <ButtonAction />
+      <ButtonAction id={post?.id}/>
 
       <p className="text-slate-400 mt-5">{post?.content}</p>
     </div>
